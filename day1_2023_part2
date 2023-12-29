@@ -1,0 +1,44 @@
+# If the line only has 1 digit, digits[0] = digits[-1]
+def extract_number(input_string):
+    # Mapping of number words to digits
+    num_dict = {
+        'zero': 0,
+        'one': 1,
+        'two': 2,
+        'three': 3,
+        'four': 4,
+        'five': 5,
+        'six': 6,
+        'seven': 7,
+        'eight': 8,
+        'nine': 9
+    }
+
+    digits = []
+    temp = ''
+    for char in input_string:
+        if char.isdigit():
+            # If the character is a digit, add it to the list
+            digits.append(int(char))
+        elif char.isalpha():
+            # If the character is a letter, add it to the temporary string
+            temp += char
+            for i in range(len(temp)):
+                if temp[i:] in num_dict:
+                    # If a substrin0g is a number word, convert it to a digit and add it to the list
+                    digits.append(num_dict[temp[i:]])
+                    temp = temp[:i]
+    return join_list_elements([digits[0], digits[-1]])  # Return number and no error flag
+
+def join_list_elements(list):
+    # Convert the integers to strings and join them
+    str_num = ''.join(map(str, list))
+    # Convert the string back to an integer
+    num = int(str_num)
+    return num
+
+with open('input_part2.txt', 'r') as file:
+    lines = (line.strip() for line in file)
+    extracted_values = [extract_number(line) for line in lines]
+    sum_of_values = sum(extracted_values)
+print(sum_of_values)
