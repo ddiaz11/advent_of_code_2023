@@ -1,0 +1,24 @@
+import unittest
+from main_2023_day2 import *
+
+class TestGame(unittest.TestCase):
+
+    def test_game_output(self):
+        TEST_CASE = "Game 123: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"
+        expected_output = [{'r': 4, 'g': 0, 'b': 3}, {'r': 1, 'g': 2, 'b': 6}, {'r': 0, 'g': 2, 'b': 0}]
+        
+        actual_output = convert_input_string(TEST_CASE)
+        
+        self.assertEqual(actual_output, expected_output)
+    
+    def test_game_number(self):
+        TEST_CASE = "Game 123: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"
+        expected_output = 123
+        
+        actual_output = extract_game_number(TEST_CASE)
+        
+        self.assertEqual(actual_output, expected_output)
+
+if __name__ == '__main__':
+    unittest.main()
+    
